@@ -78,7 +78,7 @@ const App = () => {
             color: language === "amharic" ? "#fff" : "#fff",
           }}
         >
-          Amharic
+          አማርኛ
         </button>
         <span style={{ color: "#fff", fontSize: "28px" }}> | </span>
         <button
@@ -96,12 +96,17 @@ const App = () => {
       <h2 style={{ ...styles.heading, color: "#fff" }}>
         {" "}
         {/* Change title color */}
-        Classic Furniture - Customer Experience Survey
+        Classic Furniture -{" "}
+        {language === "english"
+          ? "Customer Experience Survey"
+          : "የደንበኛ ልምድ ዳሰሳ"}
       </h2>
 
       <form style={styles.form} onSubmit={handleSubmit}>
         <div style={styles.inputGroup}>
-          <label style={styles.label}>Name</label>
+          <label style={styles.label}>
+            {language === "english" ? "Name" : "ስም"}
+          </label>
           <input
             type="text"
             name="name"
@@ -111,7 +116,9 @@ const App = () => {
           />
         </div>
         <div style={styles.inputGroup}>
-          <label style={styles.label}>Email</label>
+          <label style={styles.label}>
+            {language === "english" ? "Email" : "ኢሜይል"}
+          </label>
           <input
             type="email"
             name="email"
@@ -121,7 +128,10 @@ const App = () => {
           />
         </div>
         <div style={styles.inputGroup}>
-          <label style={styles.label}>Phone (required)</label>
+          <label style={styles.label}>
+            {language === "english" ? "Phone" : "ስልክ"} (
+            {language === "englsih" ? "required" : "አስፈላጊ"})
+          </label>
           <input
             type="tel"
             name="phone"
@@ -200,11 +210,14 @@ const styles = {
     cursor: "pointer",
   },
   heading: {
-    fontSize: "28px",
+    fontSize: "30px",
     marginBottom: "20px",
     textAlign: "center",
     fontWeight: "bold",
-    fontFamily: "Georgia, serif",
+    fontFamily: "cursive",
+    backgroundColor: "#0000006a",
+    borderRadius: "10px",
+    padding: "10px",
   },
   form: {
     backgroundColor: "#ffffffcc",
