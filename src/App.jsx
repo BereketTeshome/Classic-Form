@@ -11,6 +11,7 @@ const App = () => {
     phone: "",
     ratings: { quality: 0, variety: 0, service: 0 },
     comments: { quality: "", variety: "", service: "" },
+    suggestions: "",
   });
 
   const [language, setLanguage] = useState("amharic"); // default language
@@ -36,6 +37,10 @@ const App = () => {
       ...prevState,
       comments: { ...prevState.comments, [field]: e.target.value },
     }));
+  };
+
+  const handleSuggestionsChange = (e) => {
+    setFormData({ ...formData, suggestions: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -94,8 +99,6 @@ const App = () => {
       </div>
 
       <h2 style={{ ...styles.heading, color: "#fff" }}>
-        {" "}
-        {/* Change title color */}
         Classic Furniture -{" "}
         {language === "english"
           ? "Customer Experience Survey"
@@ -130,7 +133,7 @@ const App = () => {
         <div style={styles.inputGroup}>
           <label style={styles.label}>
             {language === "english" ? "Phone" : "ስልክ"} (
-            {language === "englsih" ? "required" : "አስፈላጊ"})
+            {language === "english" ? "required" : "አስፈላጊ"})
           </label>
           <input
             type="tel"
@@ -148,11 +151,11 @@ const App = () => {
             <label style={styles.label}>
               {field === "quality"
                 ? language === "amharic"
-                  ? "በእኛ የቤት ዕቃዎች ጥራት እና ዲዛይን ምን ያህል ረክተዋል?"
+                  ? "በዕቃዎች ጥራት እና ዲዛይን ምን ያህል ረክተዋል?"
                   : "How satisfied are you with the quality and design of our furniture products?"
                 : field === "variety"
                 ? language === "amharic"
-                  ? "የእኛ የቤት ዕቃዎች ፍላጎቶችዎን ለማሟላት ሰፋ ያለ የተለያዩ ምርቶችን ያቀርባል?"
+                  ? "ፍላጎቶችዎን ለማሟላት ሰፋ ያለ የተለያዩ አማራጮች አግኝተዋል?"
                   : "Does our Furniture offer a wide enough variety of products to meet your needs?"
                 : language === "amharic"
                 ? "በደንበኛ አገልግሎታችን ምን ያህል ረክተዋል?"
@@ -165,7 +168,11 @@ const App = () => {
               activeColor="#ffd700"
             />
             <textarea
-              placeholder="Any comments, suggestions, or complaints?"
+              placeholder={
+                language === "english"
+                  ? "Any comments, suggestions, or complaints?"
+                  : "አስተያየቶች፣ ጥቆማዎች ወይም ቅሬታዎች አልዎት?"
+              }
               style={styles.textArea}
               value={formData.comments[field]}
               onChange={(e) => handleCommentChange(field, e)}
@@ -173,9 +180,31 @@ const App = () => {
           </div>
         ))}
 
-        <button type="submit" style={styles.submitButton}>
-          Submit
-        </button>
+        {/* Additional Suggestions */}
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>
+            {language === "english"
+              ? "If you have any other comments?"
+              : "ሌላ አስተያየት ካለዎት?"}
+          </label>
+          <textarea
+            name="suggestions"
+            style={styles.textArea}
+            value={formData.suggestions}
+            onChange={handleSuggestionsChange}
+            placeholder={
+              language === "english"
+                ? "Please share any additional comments."
+                : "እባክዎን ማንኛውንም ተጨማሪ አስተያየት ካሎት ያካፍሉ"
+            }
+          />
+        </div>
+
+        <div style={styles.submitButtonContainer}>
+          <button type="submit" style={styles.submitButton}>
+            {language === "english" ? "Submit" : "ላክ"}
+          </button>
+        </div>
       </form>
       <ToastContainer />
     </div>
@@ -210,7 +239,7 @@ const styles = {
     cursor: "pointer",
   },
   heading: {
-    fontSize: "30px",
+    fontSize: "24px",
     marginBottom: "20px",
     textAlign: "center",
     fontWeight: "bold",
@@ -255,7 +284,7 @@ const styles = {
     border: "1px solid #ccc",
     marginTop: "10px",
     fontSize: "14px",
-    minHeight: "60px",
+    minHeight: "70px",
     boxSizing: "border-box",
   },
   submitButton: {
@@ -268,6 +297,9 @@ const styles = {
     borderRadius: "5px",
     cursor: "pointer",
     transition: "background-color 0.3s ease",
+  },
+  submitButtonContainer: {
+    textAlign: "center",
   },
 };
 
