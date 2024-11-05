@@ -14,7 +14,8 @@ const App = () => {
     suggestions: "",
   });
 
-  const [language, setLanguage] = useState("amharic"); // default language
+  const [language, setLanguage] = useState("amharic");
+  const [loading, setLoading] = useState(false);
 
   const handleLanguageToggle = (lang) => {
     setLanguage(lang);
@@ -54,16 +55,34 @@ const App = () => {
       toast.error("Please complete phone number and at least two ratings.");
       return;
     }
-
+    setLoading(true);
     emailjs
-      .send("your_service_id", "your_template_id", formData, "your_user_id")
+      .send(
+        "service_toqrs0b",
+        "template_cb2zvuj",
+        {
+          to_name: "Survey Team",
+          from_name: formData.name || "Anonymous",
+          phone: formData.phone,
+          quality_rating: formData.ratings.quality,
+          variety_rating: formData.ratings.variety,
+          service_rating: formData.ratings.service,
+          quality_comment: formData.comments.quality,
+          variety_comment: formData.comments.variety,
+          service_comment: formData.comments.service,
+          suggestions: formData.suggestions || "N/A",
+        },
+        "XuUj1qmYbuiJUz5iM"
+      )
       .then(
         (result) => {
           toast.success("Thank you! Your experience has been submitted.");
+          setLoading(false);
           console.log("Email sent successfully:", result.text);
         },
         (error) => {
           toast.error("Failed to send email. Please try again.");
+          setLoading(false);
           console.error("Email sending error:", error);
         }
       );
@@ -106,30 +125,6 @@ const App = () => {
       </h2>
 
       <form style={styles.form} onSubmit={handleSubmit}>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>
-            {language === "english" ? "Name" : "ስም"}
-          </label>
-          <input
-            type="text"
-            name="name"
-            style={styles.input}
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>
-            {language === "english" ? "Email" : "ኢሜይል"}
-          </label>
-          <input
-            type="email"
-            name="email"
-            style={styles.input}
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </div>
         <div style={styles.inputGroup}>
           <label style={styles.label}>
             {language === "english" ? "Phone" : "ስልክ"} (
@@ -201,8 +196,16 @@ const App = () => {
         </div>
 
         <div style={styles.submitButtonContainer}>
-          <button type="submit" style={styles.submitButton}>
-            {language === "english" ? "Submit" : "ላክ"}
+          <button type="submit" style={styles.submitButton} disabled={loading}>
+            {loading ? (
+              <span role="status" aria-hidden="true">
+                Loading...
+              </span>
+            ) : language === "english" ? (
+              "Submit"
+            ) : (
+              "ላክ"
+            )}
           </button>
         </div>
       </form>
@@ -297,6 +300,9 @@ const styles = {
     borderRadius: "5px",
     cursor: "pointer",
     transition: "background-color 0.3s ease",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   submitButtonContainer: {
     textAlign: "center",
