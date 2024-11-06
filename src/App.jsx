@@ -98,7 +98,7 @@ const App = () => {
           onClick={() => handleLanguageToggle("amharic")}
           style={{
             ...styles.languageButton,
-            backgroundColor: language === "amharic" ? "#008080" : "#0000003a",
+            backgroundColor: language === "amharic" ? "#8B0000" : "#0000003a",
             color: language === "amharic" ? "#fff" : "#fff",
           }}
         >
@@ -109,7 +109,7 @@ const App = () => {
           onClick={() => handleLanguageToggle("english")}
           style={{
             ...styles.languageButton,
-            backgroundColor: language === "english" ? "#008080" : "#0000003a",
+            backgroundColor: language === "english" ? "#8B0000" : "#0000003a",
             color: language === "english" ? "#fff" : "#fff",
           }}
         >
@@ -221,6 +221,7 @@ const styles = {
     alignItems: "center",
     fontFamily: "Arial, sans-serif",
     padding: "20px",
+    backgroundColor: "#8B0000", // Dark red background
     backgroundImage: "url('/furniture-bg.jpg')",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -229,30 +230,33 @@ const styles = {
   languageToggle: {
     fontSize: "20px",
     marginBottom: "10px",
-    color: "#333",
+    color: "#fff",
     display: "flex",
     gap: "10px",
   },
   languageButton: {
     fontSize: "22px",
     fontWeight: "bold",
-    border: "none",
+    border: "2px solid #FF6347", // Red border for the buttons
+    backgroundColor: "transparent",
+    color: "#FF6347",
     borderRadius: "5px",
     padding: "10px 17px",
     cursor: "pointer",
+    transition: "background-color 0.3s, color 0.3s",
   },
   heading: {
-    fontSize: "24px",
+    fontSize: "26px",
     marginBottom: "20px",
     textAlign: "center",
     fontWeight: "bold",
-    fontFamily: "cursive",
-    backgroundColor: "#0000006a",
+    color: "#FFDAB9", // Light peach color for contrast
+    backgroundColor: "#bd3636f5", // Match with red theme
     borderRadius: "10px",
-    padding: "10px",
+    padding: "15px",
   },
   form: {
-    backgroundColor: "#ffffffcc",
+    backgroundColor: "#b62020e0", // Light background for the form
     padding: "30px",
     borderRadius: "10px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.7)",
@@ -265,7 +269,7 @@ const styles = {
   },
   label: {
     fontSize: "16px",
-    color: "#333",
+    color: "#fff",
     marginBottom: "5px",
     display: "block",
   },
@@ -273,7 +277,7 @@ const styles = {
     width: "100%",
     padding: "10px",
     borderRadius: "5px",
-    border: "1px solid #ccc",
+    border: "1px solid #8B0000", // Red border for input fields
     fontSize: "14px",
     boxSizing: "border-box",
   },
@@ -284,7 +288,7 @@ const styles = {
     width: "100%",
     padding: "10px",
     borderRadius: "5px",
-    border: "1px solid #ccc",
+    border: "1px solid #8B0000",
     marginTop: "10px",
     fontSize: "14px",
     minHeight: "70px",
@@ -294,9 +298,9 @@ const styles = {
     marginTop: "20px",
     padding: "10px 20px",
     fontSize: "16px",
-    color: "#fff",
-    backgroundColor: "#008080",
-    border: "none",
+    color: "#333", // Light text color on button
+    backgroundColor: "#fff",
+    border: "2px solid #8B0000",
     borderRadius: "5px",
     cursor: "pointer",
     transition: "background-color 0.3s ease",
