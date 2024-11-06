@@ -299,17 +299,16 @@ const styles = {
     padding: "10px 20px",
     fontSize: "16px",
     color: "#333", // Light text color on button
-    backgroundColor: "#fff",
+    backgroundColor: "#g",
     border: "2px solid #8B0000",
     borderRadius: "5px",
     cursor: "pointer",
     transition: "background-color 0.3s ease",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    boxShadow: "0px 3px 20px white",
   },
   submitButtonContainer: {
     textAlign: "center",
+    width: "100%",
   },
 };
 
